@@ -15,10 +15,14 @@ export default async function Home({
     buttons = "[]", // Default to an empty array if not provided
   } = resolvedSearchParams;
 
-  // Parse buttons from JSON string
   let parsedButtons = JSON.parse(buttons as string);
-
-  // Create a JSON object for the meta tags
+  if (parsedButtons) {
+    parsedButtons = parsedButtons.map((button: any, index: number) => ({
+      [`fc:frame:button:${index + 1}`]: button.content,
+      [`fc:frame:button:${index + 1}:action`]: button.action,
+      [`fc:frame:button:${index + 1}:target`]: button.target,
+    }));
+  }
   const metaTags = {
     "og:title": title,
     "fc:frame": frame,
@@ -28,20 +32,45 @@ export default async function Home({
     "og:image": image,
     "fc:frame:image": image,
     "fc:frame:ratio": "1.91:1",
-    "fc:frame:buttons": parsedButtons,
   };
-
+  let metas = Object.entries(metaTags).map(([key, value]) => (
+    <meta
+      key={key}
+      property={key}
+      content={typeof value === "object" ? JSON.stringify(value) : value}
+    />
+  ));
+  metas = [
+    <meta key="viewport" name="viewport" content="width=device-width" />,
+    ...metas,
+    ...parsedButtons.map((button: any, index: number) => (
+      <meta
+        key={`fc:frame:button:${index + 1}`}
+        property={`fc:frame:button:${index + 1}`}
+        content={button[`fc:frame:button:${index + 1}`]}
+      />
+    )),
+    ...parsedButtons.map((button: any, index: number) => (
+      <meta
+        key={`fc:frame:button:${index + 1}:action`}
+        property={`fc:frame:button:${index + 1}:action`}
+        content={button[`fc:frame:button:${index + 1}:action`]}
+      />
+    )),
+    ...parsedButtons.map((button: any, index: number) => (
+      <meta
+        key={`fc:frame:button:${index + 1}:target`}
+        property={`fc:frame:button:${index + 1}:target`}
+        content={button[`fc:frame:button:${index + 1}:target`]}
+      />
+    )),
+  ];
   return (
     <html>
       <head>
         <meta charSet="utf-8" />
-        {Object.entries(metaTags).map(([key, value]) => (
-          <meta
-            key={key}
-            property={key}
-            content={typeof value === "object" ? JSON.stringify(value) : value}
-          />
-        ))}
+        <meta name="viewport" content="width=device-width" />
+        {metas}
       </head>
       <body>
         <pre>{JSON.stringify(metaTags, null, 2)}</pre>

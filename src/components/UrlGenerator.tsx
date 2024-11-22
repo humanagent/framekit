@@ -13,7 +13,6 @@ export default function UrlGenerator({ params }: { params: any }) {
 
   const amountUint256 = parseUnits(formData.amount.toString(), 6);
   const ethereumUrl = `ethereum:${formData.tokenAddress}@${formData.chainId}/transfer?address=${formData.recipientAddress}&uint256=${amountUint256}`;
-  console.log(ethereumUrl);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -67,7 +66,8 @@ export default function UrlGenerator({ params }: { params: any }) {
                 onChange={(e) =>
                   setFormData({ ...formData, chainId: e.target.value })
                 }
-                className="select">
+                className="select"
+              >
                 <option value="8453">Base</option>
                 <option value="1">Ethereum</option>
                 <option value="137">Polygon</option>
@@ -88,7 +88,8 @@ export default function UrlGenerator({ params }: { params: any }) {
                   padding: "10px",
                   borderRadius: "5px",
                   marginBottom: "10px",
-                }}>
+                }}
+              >
                 This frame can be sent through Converse and includes a button
                 that deeplinks to the wallet transaction. It only works on
                 mobile devices and EVM wallets.
@@ -97,7 +98,8 @@ export default function UrlGenerator({ params }: { params: any }) {
                 <input readOnly value={generatedUrl} className="input" />
                 <button
                   onClick={() => navigator.clipboard.writeText(generatedUrl)}
-                  className="copy-button">
+                  className="copy-button"
+                >
                   Copy
                 </button>
               </div>
@@ -107,7 +109,8 @@ export default function UrlGenerator({ params }: { params: any }) {
                   display: "flex",
                   justifyContent: "center",
                   padding: "20px",
-                }}>
+                }}
+              >
                 <QRCodeSVG value={ethereumUrl} size={128} />
               </div>
               <div
@@ -116,7 +119,8 @@ export default function UrlGenerator({ params }: { params: any }) {
                   padding: "10px",
                   borderRadius: "5px",
                   marginBottom: "10px",
-                }}>
+                }}
+              >
                 This QR works in Mobile, scan this qr code with your mobile
                 camera
               </div>
@@ -130,12 +134,14 @@ export default function UrlGenerator({ params }: { params: any }) {
             marginTop: "3rem",
             width: "100%",
             marginBottom: "1rem",
-          }}>
+          }}
+        >
           Powered by{" "}
           <a
             href="https://github.com/ephemeraHQ/message-kit"
             target="_blank"
-            rel="noopener noreferrer">
+            rel="noopener noreferrer"
+          >
             MessageKit
           </a>
         </div>

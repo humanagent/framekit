@@ -1,12 +1,3 @@
 {
-  "/_not-found/page": "app/_not-found/page.js",
-  "/api/image/route": "app/api/image/route.js",
-  "/api/receipt/route": "app/api/receipt/route.js",
-  "/api/mint/route": "app/api/mint/route.js",
-  "/favicon.ico/route": "app/favicon.ico/route.js",
-  "/custom/page": "app/custom/page.js",
-  "/mint/page": "app/mint/page.js",
-  "/payment/page": "app/payment/page.js",
-  "/page": "app/page.js",
-  "/receipt/page": "app/receipt/page.js"
+  "/custom/page": "app/custom/page.js"
 }

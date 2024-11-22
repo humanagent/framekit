@@ -1,4 +1,4 @@
-// File: /Users/fabrizioguespe/DevRel/message-kit/packages/framekit/src/app/layout.tsx
+// File: /Users/fabrizioguespe/DevRel/framekit/src/app/layout.tsx
 import * as entry from '../../../src/app/layout.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 
